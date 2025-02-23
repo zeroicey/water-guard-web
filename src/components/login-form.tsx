@@ -1,3 +1,5 @@
+'use client';
+
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Lock, Mail } from "lucide-react";
 
 export function LoginForm({
   className,
@@ -16,39 +19,57 @@ export function LoginForm({
 }: React.ComponentPropsWithoutRef<"div">) {
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-2xl">登录</CardTitle>
-          <CardDescription>
-            请输入您的邮箱和密码登录账户
+      <Card className="backdrop-blur-sm bg-white/80 border-none shadow-2xl">
+        <CardHeader className="space-y-2">
+          <CardTitle className="text-2xl font-bold">管理员登录</CardTitle>
+          <CardDescription className="text-gray-600">
+            请输入您的管理员账号和密码
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
-            <div className="flex flex-col gap-6">
-              <div className="grid gap-2">
-                <Label htmlFor="email">邮箱</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="example@example.com"
-                  required
-                />
-              </div>
-              <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="password">密码</Label>
-                  <a
-                    href="#"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                  >
-                    忘记密码？
-                  </a>
+          <form onSubmit={(e) => e.preventDefault()}>
+            <div className="flex flex-col gap-5">
+              <div className="space-y-2">
+                <Label 
+                  htmlFor="email" 
+                  className="text-sm font-medium text-gray-700"
+                >
+                  邮箱账号
+                </Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="请输入邮箱账号"
+                    className="pl-10 bg-white/50"
+                    required
+                  />
                 </div>
-                <Input id="password" type="password" required />
               </div>
-              <Button type="submit" className="w-full">
-                登录
+              <div className="space-y-2">
+                <Label 
+                  htmlFor="password"
+                  className="text-sm font-medium text-gray-700"
+                >
+                  密码
+                </Label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                  <Input 
+                    id="password" 
+                    type="password" 
+                    placeholder="请输入密码"
+                    className="pl-10 bg-white/50"
+                    required 
+                  />
+                </div>
+              </div>
+              <Button 
+                type="submit" 
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-200"
+              >
+                登录系统
               </Button>
             </div>
           </form>
