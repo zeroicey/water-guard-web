@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Water Guard Web
 
-## Getting Started
+基于现代Web技术栈构建的智能水质监测系统前端项目。本系统提供实时水质监测、摄像头监控、预警管理等功能，帮助用户更好地进行水质管理和监控。
 
-First, run the development server:
+## 技术栈
+
+- **运行时环境**: [Bun.js](https://bun.sh/) - 超快的JavaScript运行时
+- **前端框架**: [Next.js 14](https://nextjs.org/) - React框架，提供服务端渲染和路由功能
+- **UI框架**: [React](https://react.dev/) - 用户界面构建库
+- **样式解决方案**: [Tailwind CSS](https://tailwindcss.com/) - 实用优先的CSS框架
+- **UI组件**: [shadcn/ui](https://ui.shadcn.com/) - 高质量可重用React组件库
+
+## 主要功能
+
+- 实时数据监控面板
+- 多摄像头监控管理
+- 水质参数实时监测
+- 智能预警系统
+- 数据趋势分析
+- 监测点位管理
+
+## 快速开始
+
+确保你的开发环境已安装 [Bun](https://bun.sh)，然后按照以下步骤操作：
+
+1. 克隆项目并安装依赖：
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+# 克隆项目
+git clone <repository-url>
+cd water-guard-web
+
+# 安装依赖
+bun install
+```
+
+2. 启动开发服务器：
+
+```bash
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+访问 [http://localhost:3000](http://localhost:3000) 查看应用。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 项目结构
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+water-guard-web/
+├── src/
+│   ├── app/                 # 页面和路由
+│   │   ├── dashboard/      # 仪表盘相关页面
+│   │   ├── login/         # 登录页面
+│   │   └── layout.tsx     # 根布局
+│   ├── components/         # 可重用组件
+│   │   ├── ui/            # UI基础组件
+│   │   └── ...           # 其他组件
+│   └── lib/               # 工具函数和配置
+├── public/                # 静态资源
+├── tailwind.config.ts    # Tailwind配置
+├── next.config.ts        # Next.js配置
+└── package.json          # 项目依赖和脚本
+```
 
-## Learn More
+## 开发指南
 
-To learn more about Next.js, take a look at the following resources:
+- 使用 `bun run dev` 启动开发服务器
+- 使用 `bun run build` 构建生产版本
+- 使用 `bun run lint` 运行代码检查
+- 使用 `bun run format` 格式化代码
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 环境配置
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+创建 `.env.local` 文件并配置以下环境变量：
 
-## Deploy on Vercel
+```env
+NEXT_PUBLIC_API_URL=你的API地址
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 部署
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+本项目可以部署到任何支持Node.js的环境。推荐使用Vercel进行部署：
+
+```bash
+bun run build
+bun run start
+```
+
+## 贡献指南
+
+1. Fork 本仓库
+2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交改动 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 提交Pull Request
+
+## 许可证
+
+本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
