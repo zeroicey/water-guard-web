@@ -44,15 +44,6 @@ export default function AreaMonitorPage() {
 
   return (
     <div>
-      <div className="mb-8">
-        <Link href="/dashboard" className="mb-4 flex items-center text-sm text-gray-500 hover:text-gray-900">
-          <ChevronLeft className="mr-1 h-4 w-4" />
-          返回区域列表
-        </Link>
-        <h1 className="text-2xl font-semibold">{areaName}</h1>
-        <p className="text-sm text-gray-500">监控点列表</p>
-      </div>
-
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {areaCameras.map((camera) => (
           <Link key={camera.id} href={`/dashboard/monitor/${areaId}/${camera.id}`}>

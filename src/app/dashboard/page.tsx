@@ -43,11 +43,6 @@ const areas = [
 export default function DashboardPage() {
   return (
     <div>
-      <div className="mb-8">
-        <h1 className="text-2xl font-semibold">监控区域</h1>
-        <p className="text-sm text-gray-500">选择区域查看详细监控信息</p>
-      </div>
-      
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {areas.map((area) => (
           <Link key={area.id} href={`/dashboard/monitor/${area.id}`}>

@@ -39,25 +39,6 @@ export default function CameraDetailPage() {
 
   return (
     <div>
-      <div className="mb-8">
-        <Link 
-          href={`/dashboard/monitor/${areaId}`} 
-          className="mb-4 flex items-center text-sm text-gray-500 hover:text-gray-900"
-        >
-          <ChevronLeft className="mr-1 h-4 w-4" />
-          返回{areaName}
-        </Link>
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-semibold">{camera.name}</h1>
-            <p className="text-sm text-gray-500">{camera.location}</p>
-          </div>
-          <Badge variant={camera.status === "online" ? "default" : "secondary"}>
-            {camera.status === "online" ? "在线" : "离线"}
-          </Badge>
-        </div>
-      </div>
-
       <div className="grid gap-6 lg:grid-cols-3">
         {/* 监控画面 */}
         <div className="lg:col-span-2">

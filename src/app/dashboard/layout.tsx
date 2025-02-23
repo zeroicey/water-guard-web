@@ -3,6 +3,8 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { Separator } from "@/components/ui/separator";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
+import { PageTitle } from "@/components/page-title";
 
 export default function DashboardLayout({
   children,
@@ -15,9 +17,12 @@ export default function DashboardLayout({
       <main className="container mx-auto px-4 py-4">
         <div className="flex items-center space-x-4 mb-4">
           <SidebarTrigger />
-          <span className="text-lg font-medium">智能河道污染监控系统</span>
+          <PageTitle />
         </div>
-        <Separator className="mb-6" />
+        <Separator className="mb-4" />
+        <div className="mb-6">
+          <BreadcrumbNav />
+        </div>
         <div className="px-2">
           {children}
         </div>
