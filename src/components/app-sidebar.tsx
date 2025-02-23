@@ -1,175 +1,88 @@
-"use client";
+'use client';
 
 import * as React from "react";
 import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
+  AlertCircle,
+  Camera,
+  ChevronDown,
+  Droplets,
+  LineChart,
   Settings2,
-  SquareTerminal,
 } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-import { NavMain } from "@/components/nav-main";
-import { NavProjects } from "@/components/nav-projects";
-import { NavUser } from "@/components/nav-user";
-import { TeamSwitcher } from "@/components/team-switcher";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-  SidebarRail,
 } from "@/components/ui/sidebar";
 
-// This is sample data.
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+// 系统导航数据
+const navItems = [
+  {
+    title: "实时监控",
+    icon: Camera,
+    href: "/dashboard",
   },
-  teams: [
-    {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
-    },
-  ],
-  navMain: [
-    {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
-    },
-  ],
-};
+  {
+    title: "数据分析",
+    icon: LineChart,
+    href: "/dashboard/analysis",
+  },
+  {
+    title: "预警管理",
+    icon: AlertCircle,
+    href: "/dashboard/alerts",
+  },
+  {
+    title: "系统管理",
+    icon: Settings2,
+    href: "/dashboard/settings",
+  },
+];
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar() {
+  const pathname = usePathname();
+
   return (
-    <Sidebar collapsible="icon" {...props}>
+    <Sidebar>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        <div className="flex items-center gap-2 px-4">
+          <Droplets className="h-6 w-6 text-blue-600" />
+          <span className="font-semibold">智能河道污染监控系统</span>
+        </div>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
+        <nav className="space-y-1 px-2">
+          {navItems.map((item) => (
+            <Link
+              key={item.title}
+              href={item.href}
+              className={`
+                flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors
+                ${pathname === item.href 
+                  ? 'bg-blue-50 text-blue-600' 
+                  : 'text-gray-600 hover:bg-gray-50'
+                }
+              `}
+            >
+              <item.icon className="h-4 w-4" />
+              <span>{item.title}</span>
+            </Link>
+          ))}
+        </nav>
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <div className="flex items-center gap-2 px-4 py-2">
+          <div className="h-8 w-8 rounded-full bg-gray-100" />
+          <div className="flex-1 truncate">
+            <div className="text-sm font-medium text-gray-900">管理员</div>
+            <div className="text-xs text-gray-500">admin@waterguard.com</div>
+          </div>
+        </div>
       </SidebarFooter>
-      <SidebarRail />
     </Sidebar>
   );
 }

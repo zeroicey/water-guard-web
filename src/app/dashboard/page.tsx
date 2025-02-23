@@ -1,52 +1,82 @@
-import { AppSidebar } from "@/components/app-sidebar";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { MapPin } from "lucide-react";
+import Link from "next/link";
 
-export default function Page() {
+const areas = [
+  {
+    id: "riverside",
+    name: "滨江区域",
+    description: "沿江岸线水质监测点",
+    cameras: 12,
+    alerts: 2,
+  },
+  {
+    id: "east",
+    name: "城东区域", 
+    description: "城东主要河道",
+    cameras: 8,
+    alerts: 0,
+  },
+  {
+    id: "west",
+    name: "城西区域",
+    description: "城西水系监测",
+    cameras: 10,
+    alerts: 1,
+  },
+  {
+    id: "north",
+    name: "城北区域",
+    description: "北部水域监控",
+    cameras: 6,
+    alerts: 0,
+  },
+  {
+    id: "south", 
+    name: "城南区域",
+    description: "南部水系监测点",
+    cameras: 9,
+    alerts: 1,
+  },
+];
+
+export default function DashboardPage() {
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-          <div className="flex items-center gap-2 px-4">
-            <SidebarTrigger className="-ml-1" />
-            <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">
-                    Building Your Application
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-          </div>
-        </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="aspect-video rounded-xl bg-muted/50" />
-            <div className="aspect-video rounded-xl bg-muted/50" />
-            <div className="aspect-video rounded-xl bg-muted/50" />
-          </div>
-          <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
-        </div>
-      </SidebarInset>
-    </SidebarProvider>
+    <div>
+      <div className="mb-8">
+        <h1 className="text-2xl font-semibold">监控区域</h1>
+        <p className="text-sm text-gray-500">选择区域查看详细监控信息</p>
+      </div>
+      
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {areas.map((area) => (
+          <Link key={area.id} href={`/dashboard/monitor/${area.id}`}>
+            <Card className="hover:bg-gray-50 transition-colors">
+              <CardHeader className="flex flex-row items-center justify-between pb-2">
+                <CardTitle className="text-lg font-medium">
+                  {area.name}
+                </CardTitle>
+                <MapPin className="h-4 w-4 text-gray-500" />
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="mb-3">
+                  {area.description}
+                </CardDescription>
+                <div className="flex gap-4 text-sm">
+                  <div>
+                    <span className="font-medium">{area.cameras}</span> 个监控点
+                  </div>
+                  {area.alerts > 0 && (
+                    <div className="text-red-600">
+                      <span className="font-medium">{area.alerts}</span> 个预警
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
+        ))}
+      </div>
+    </div>
   );
 }
